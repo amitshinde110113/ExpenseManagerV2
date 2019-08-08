@@ -1,0 +1,8 @@
+{
+    "env":{
+        "MONGO_PW":"amit_shinde",
+        "jwt_key":"password",
+        "MailPass":"8975139966"
+    }
+    
+    }

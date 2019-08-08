@@ -1,0 +1,28 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "description": "Expence manager server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Amit Shinde",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.17.1",
+    "jimp": "^0.6.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.6",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "nodemon": "^1.19.1",
+    "sharp": "^0.23.0"
+  },
+  "devDependencies": {
+    "compress-images": "^1.5.8"
+  }
+}
