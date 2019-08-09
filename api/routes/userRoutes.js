@@ -50,6 +50,9 @@ router.get('/:userId',userController.getUser);
 
 
 router.post('/login',userController.login);
+router.post('/getotp',userController.getOTP);
+router.post('/resetpassword',userController.resetPassword);
+
 
 
 // router.post('/forgetpassword',controller.forgertPassword)

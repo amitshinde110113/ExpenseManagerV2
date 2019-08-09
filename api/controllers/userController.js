@@ -4,6 +4,7 @@ const router= express.Router();
 const User = require('../models/users');
 const Group = require('../models/groups');
 var Jimp = require('jimp');
+var nodemailer = require('nodemailer');
 //const bcrypt=require('bcrypt');
 const jwt= require('jsonwebtoken');
 var CryptoJS = require("crypto-js");
@@ -11,6 +12,7 @@ var CryptoJS = require("crypto-js");
 const Crypto=require('crypto')
 ///const cryptr = new Cryptr('myTotalySecretKey');
 //const checkAuth=require('../middelware/check-auth');
+const random = require('random')
 
 exports.signUp=(req,res,next)=>{
     console.log(req.body.profiePic);
@@ -171,4 +173,55 @@ exports.login=(req,res,next)=>{
             res.status(500).json({error:err});
         });
 
+}
+
+exports.getOTP=(req,res,next)=>{
+
+    const mail= req.body.email
+    const OTP=random.int(min = 1000, max = 9999);
+    //console.log(OTP);
+    
+    User.findOne({email :req.body.email},(error, result)=>{
+
+        sendResetMail();
+    })
+    function sendResetMail(){
+         res.status(200).json({OTP})
+
+        const transporter = nodemailer.createTransport({
+            service : 'gmail',
+            auth: {
+                user: 'amitshinde110113@gmail.com',
+                pass: '8975139966'
+            }
+            
+        });
+        const mailOption ={
+            from : 'amitshinde110113@gmail.com',
+            to: mail,
+            subject: 'Reset Password',
+            text: 'One Time Password is '+OTP
+        }
+        transporter.sendMail(mailOption , (error, info)=>{
+            if(error){
+                console.log(error);
+            }else{
+                console.log('Email sent: ' + info.response);
+                res.status(200).json({message:'Email Sent'});
+            }
+        })
+    }  
+
+
+}
+
+
+exports.resetPassword=(req, res, next)=>{
+    let email2= req.body.email
+    console.log(req.body);
+    User.updateOne({email:email2},{$set :{password: req.body.password}}).then(response=>{
+        res.status(200).json({
+            message: "updated Success"
+        })
+    })
 }
