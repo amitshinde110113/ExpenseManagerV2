@@ -134,7 +134,7 @@ exports.login = (req, res, next) => {
                 var bytesDB = CryptoJS.AES.decrypt(result.password.toString(), result.email);
                 var plaintextDB = bytesDB.toString(CryptoJS.enc.Utf8);
 
-                console.log('pasword', plaintextDB);
+               // console.log('pasword', plaintextDB);
 
                 return plaintextDB
             }
@@ -143,7 +143,7 @@ exports.login = (req, res, next) => {
 
 
 
-            console.log('It is form DB', convertDBAESToPlain(), '   ----------', convertUserAESToPlain());
+          //  console.log('It is form DB', convertDBAESToPlain(), '   ----------', convertUserAESToPlain());
             function generateToken(pass, pass1) {
 
                 if (pass === pass1) {
@@ -193,7 +193,7 @@ exports.getOTP = (req, res, next) => {
             service: 'gmail',
             auth: {
                 user: 'amitshinde110113@gmail.com',
-                pass: '8975139966'
+                pass: ''
             }
 
         });
@@ -205,9 +205,7 @@ exports.getOTP = (req, res, next) => {
         }
         transporter.sendMail(mailOption, (error, info) => {
             if (error) {
-                console.log(error);
             } else {
-                console.log('Email sent: ' + info.response);
                 res.status(200).json({ message: 'Email Sent' });
             }
         })
@@ -219,7 +217,6 @@ exports.getOTP = (req, res, next) => {
 
 exports.resetPassword = (req, res, next) => {
     let email2 = req.body.email
-    console.log(req.body);
     User.updateOne({ email: email2 }, { $set: { password: req.body.password } }).then(response => {
         res.status(200).json({
             message: "updated Success"
@@ -229,7 +226,6 @@ exports.resetPassword = (req, res, next) => {
 
 exports.updateProfile = (req, res, next) => {
     let email2 = req.body.email
-    console.log(req.body);
     try {
         User.updateOne({ email: email2 }, { $set: { profiePic: req.file.path } }).then(response => {
             deleteOld = req.body.oldProfile;
@@ -238,7 +234,6 @@ exports.updateProfile = (req, res, next) => {
                     if (err) {
                     }
                     // if no error, file has been deleted successfully
-                    console.log('File deleted!');
                 });
             }
             res.status(200).json({
