@@ -4,6 +4,7 @@ const router= express.Router();
 const userController=require('../controllers/userController')
 //const checkAuth=require('../middelware/check-auth');
 const multer=require('multer')
+
 var Jimp = require('jimp');
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -52,7 +53,7 @@ router.get('/:userId',userController.getUser);
 router.post('/login',userController.login);
 router.post('/getotp',userController.getOTP);
 router.post('/resetpassword',userController.resetPassword);
-router.post('/update',upload.single('profiePic'),userController.updateProfile);
+router.patch('/update',upload.single('profiePic'),userController.updateProfile);
 
 
 
