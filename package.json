@@ -23,7 +23,7 @@
     "node-mailer": "^0.1.1",
     "nodemon": "^1.19.1",
     "random": "^2.1.1",
-    "sharp": "^0.23.0"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "compress-images": "^1.5.8"
